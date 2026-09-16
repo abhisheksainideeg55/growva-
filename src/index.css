@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --body: #fffaf3;
+  --black: #000000;
+  --white: #ffffff;
+  --theme: #fe5e3a;
+  --theme2: #f5f1ea;
+  --theme3: #8a5133;
+  --theme4: #b90808;
+  --title: #282c32;
+  --orange: #e78c45;
+  --text: #0c0c0c;
+  --text2: #cbcbcb;
+  --border: #0c0c0c;
+  --lime-bg: #eef8d8;
+  --yellow-bg: #ffe175;
+}
+
+@layer base {
+  body {
+    background-color: var(--body);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    color: var(--title);
+  }
+}
+
+/* Custom Growva Button Styles */
+.theme-btn {
+  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-white bg-[#126E89] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+}
+
+.theme-btn-orange {
+  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-white bg-[#126E89] hover:bg-[#fff] hover:text-[#126E89] hover:border-[#126E89] hover:border-[1px] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+}
+
+.theme-btn-outline {
+  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-[#126E89] border-2 border-[#126E89]  hover:text-white transition-all duration-300;
+}
+
+.theme-btn-lime {
+  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-[#126E89] bg-white border border-[#126E89] hover:bg-[#126E89] hover:text-white transition-all duration-300;
+}
+
+/* Lime Section Wrapper */
+.lime-section {
+  background-color: #f1fbe2;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Subtitle Pill / Badge */
+.sub-badge {
+  @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c0c0c]/5 text-[#fe5e3a] font-syne font-bold text-xs uppercase tracking-wider mb-3;
+}
+
+/* Custom Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fffaf3;
+}
+::-webkit-scrollbar-thumb {
+  background: #e0d8cc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fe5e3a;
+}
