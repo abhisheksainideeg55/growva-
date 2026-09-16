@@ -1,842 +1,254 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FaTimes,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaAngleDown,
-  FaArrowRight,
   FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
   FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaYoutube,
+  FaGithub,
+  FaWhatsapp,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaArrowRight,
+  FaCheckCircle,
+  FaPaperPlane
 } from 'react-icons/fa';
 
-const NAV_LINKS = [
-  { label: 'Home', to: '/' },
+export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
-  { label: 'About Us', to: '/about' },
-
-  {
-    label: 'Services',
-    key: 'services',
-    children: [
-      { label: 'Services List', to: '/services' },
-      { label: 'Service Details', to: '/service-details' },
-    ],
-  },
-
-  {
-    label: 'Projects',
-    key: 'projects',
-    children: [
-      { label: 'Projects List', to: '/project' },
-      { label: 'Project Details', to: '/project-details' },
-    ],
-  },
-
-  {
-    label: 'Blog',
-    key: 'blog',
-    children: [
-      { label: 'Blog Articles', to: '/blog' },
-      { label: 'Blog Details', to: '/blog-details' },
-    ],
-  },
-
-  { label: 'Contact Us', to: '/contact' },
-];
-
-const SOCIALS = [
-  { icon: FaFacebookF, label: 'Facebook' },
-  { icon: FaTwitter, label: 'Twitter' },
-  { icon: FaLinkedinIn, label: 'LinkedIn' },
-  { icon: FaInstagram, label: 'Instagram' },
-];
-
-export default function OffcanvasMenu({ isOpen, onClose }) {
-  const [openSubmenu, setOpenSubmenu] = useState(null);
-  const [shouldRender, setShouldRender] = useState(isOpen);
-
-  /* =========================
-      DRAWER MOUNT / UNMOUNT
-  ========================== */
-  useEffect(() => {
-    if (isOpen) {
-      setShouldRender(true);
-    }
-  }, [isOpen]);
-
-  /* =========================
-      BODY SCROLL LOCK
-  ========================== */
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  if (!shouldRender) return null;
-
-  /* =========================
-      SUBMENU TOGGLE
-  ========================== */
-  const toggleSubmenu = (menu) => {
-    setOpenSubmenu(
-      openSubmenu === menu ? null : menu
-    );
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+    setTimeout(() => {
+      setEmail('');
+      setSubscribed(false);
+    }, 4000);
   };
 
-  /* =========================
-      CLOSE ANIMATION
-  ========================== */
-  const handlePanelTransitionEnd = () => {
-    if (!isOpen) {
-      setShouldRender(false);
-      setOpenSubmenu(null);
-    }
-  };
+  const services = [
+    { name: 'Web Development', to: '/services' },
+    { name: 'UI/UX Design', to: '/services' },
+    { name: 'Digital Marketing', to: '/services' },
+    { name: 'Brand Identity', to: '/services' },
+    { name: 'Cloud & DevOps', to: '/services' },
+    { name: 'Analytics & Reporting', to: '/services' },
+  ];
+
+  const quickLinks = [
+    { name: 'Home', to: '/' },
+    { name: 'About Growva', to: '/about' },
+    { name: 'Featured Projects', to: '/projects' },
+    { name: 'Our Process', to: '/#process' },
+    { name: 'Client Testimonials', to: '/#testimonials' },
+    { name: 'Contact Us', to: '/contact' },
+  ];
+
+  const socials = [
+    { icon: FaWhatsapp, href: 'https://api.whatsapp.com/send/?phone=919351764755&text=Hi%20Growva!%20I%20am%20interested%20in%20discussing%20a%20project%20with%20your%20team.', label: 'WhatsApp' },
+    { icon: FaFacebookF, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: FaInstagram, href: 'https://instagram.com', label: 'Instagram' },
+    { icon: FaLinkedinIn, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: FaTwitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: FaYoutube, href: 'https://youtube.com', label: 'YouTube' },
+    { icon: FaGithub, href: 'https://github.com', label: 'GitHub' },
+  ];
 
   return (
-    <div className="fixed inset-0 z-[60] overflow-hidden">
+    <footer className="relative bg-[#0F172A] text-white overflow-hidden pt-20 pb-10 border-t border-slate-800">
+      {/* Background Decorative Ambient Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0E7490]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#06B6D4]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* =================================
-          BACKDROP
-      ================================== */}
-      <div
-        className={`
-          fixed
-          inset-0
-          bg-[#172033]/20
-          backdrop-blur-sm
-          transition-opacity
-          duration-300
-          ${
-            isOpen
-              ? 'opacity-100'
-              : 'opacity-0'
-          }
-        `}
-        onClick={onClose}
-      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-slate-800/80">
+          {/* Column 1: Brand & Bio (4 cols on lg) */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link to="/" className="inline-flex items-center gap-3 group">
+              <div className="w-12 h-12 rounded-2xl bg-white p-1 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <img
+                  src="/growlogo.png"
+                  alt="Growva Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-syne font-extrabold text-2xl text-white tracking-wider uppercase">
+                  GROWVA
+                </span>
+                <span className="text-[9px] font-semibold text-cyan-400 tracking-widest uppercase">
+                  Engineered For Growth
+                </span>
+              </div>
+            </Link>
 
-      {/* =================================
-          DRAWER
-      ================================== */}
-      <div
-        onTransitionEnd={handlePanelTransitionEnd}
-        className={`
-          absolute
-          right-0
-          top-0
-          z-10
+            <p className="font-outfit text-sm text-slate-400 leading-relaxed max-w-sm">
+              We engineer scalable digital platforms, modern web applications, and high-impact digital experiences that turn vision into measurable growth.
+            </p>
 
-          flex
-          h-full
-          w-full
-          max-w-[390px]
-          flex-col
-
-          overflow-x-hidden
-          overflow-y-hidden
-
-          bg-white
-
-          shadow-[-20px_0_60px_-25px_rgba(30,60,100,0.30)]
-
-          transition-transform
-          duration-300
-          ease-out
-
-          ${
-            isOpen
-              ? 'translate-x-0'
-              : 'translate-x-full'
-          }
-        `}
-      >
-
-        {/* =================================
-            SOFT BACKGROUND GLOWS
-        ================================== */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            -right-20
-            top-10
-            h-48
-            w-48
-            rounded-full
-            bg-[#328CF5]/[0.07]
-            blur-3xl
-          "
-        />
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            -left-20
-            bottom-20
-            h-48
-            w-48
-            rounded-full
-            bg-[#FF8A4C]/[0.06]
-            blur-3xl
-          "
-        />
-
-        {/* =================================
-            HEADER
-            Header does NOT scroll
-        ================================== */}
-        <div
-          className="
-            relative
-            z-20
-            flex
-            flex-shrink-0
-            items-center
-            justify-between
-            border-b
-            border-[#E7EDF5]
-            bg-white
-            px-6
-            pb-5
-            pt-6
-            sm:px-8
-          "
-        >
-
-          {/* Logo */}
-          <Link
-            to="/"
-            onClick={onClose}
-            className="
-              group
-              flex
-              min-w-0
-              items-center
-            "
-          >
-            <img
-              src="/assets/images/logo/growlogo.png"
-              alt="Growva Logo"
-              className="
-                h-10
-                w-auto
-                max-w-full
-                object-contain
-                transition-transform
-                duration-300
-                group-hover:scale-[1.02]
-              "
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  '/assets/images/logo/itekHeaderLogo.png';
-              }}
-            />
-          </Link>
-
-          {/* Close Button */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close menu"
-            className="
-              ml-4
-              flex
-              h-11
-              w-11
-              flex-shrink-0
-              items-center
-              justify-center
-              rounded-full
-              border
-              border-[#E3EAF3]
-              bg-white
-              text-[#172033]
-              shadow-[0_5px_15px_-8px_rgba(30,60,100,0.30)]
-              transition-all
-              duration-300
-              hover:border-[#328CF5]/30
-              hover:bg-[#F3F8FF]
-              hover:text-[#126E89]
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#328CF5]/30
-            "
-          >
-            <FaTimes className="h-4 w-4" />
-          </button>
-        </div>
-
-        {/* =================================
-            SCROLLABLE CONTENT
-            ONLY THIS AREA SCROLLS
-            Y-axis only
-        ================================== */}
-        <div
-          className="
-            relative
-            z-10
-            min-h-0
-            flex-1
-            overflow-x-hidden
-            overflow-y-auto
-            overscroll-contain
-            px-6
-            py-6
-            sm:px-8
-          "
-        >
-
-          {/* =================================
-              MOBILE NAVIGATION
-          ================================== */}
-          <nav className="w-full">
-
-            {NAV_LINKS.map((item) =>
-              item.children ? (
-
-                <div
-                  key={item.key}
-                  className="
-                    w-full
-                    border-b
-                    border-[#EEF2F7]
-                  "
-                >
-
-                  {/* Parent Menu */}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      toggleSubmenu(item.key)
-                    }
-                    className="
-                      group
-                      flex
-                      w-full
-                      min-w-0
-                      items-center
-                      justify-between
-                      gap-4
-                      py-4
-                      text-left
-                      font-syne
-                      text-[16px]
-                      font-semibold
-                      text-[#172033]
-                      transition-colors
-                      duration-200
-                      hover:text-[#126E89]
-                    "
-                    aria-expanded={
-                      openSubmenu === item.key
-                    }
-                  >
-
-                    <span className="min-w-0 truncate">
-                      {item.label}
-                    </span>
-
-                    <span
-                      className="
-                        flex
-                        h-8
-                        w-8
-                        flex-shrink-0
-                        items-center
-                        justify-center
-                        rounded-full
-                        bg-[#F3F8FF]
-                        transition-all
-                        duration-300
-                        group-hover:bg-[#EAF4FF]
-                      "
-                    >
-                      <FaAngleDown
-                        className={`
-                          text-xs
-                          text-[#328CF5]
-                          transition-transform
-                          duration-300
-                          ${
-                            openSubmenu === item.key
-                              ? 'rotate-180'
-                              : ''
-                          }
-                        `}
-                      />
-                    </span>
-
-                  </button>
-
-                  {/* Submenu */}
-                  <div
-                    className={`
-                      overflow-hidden
-                      transition-all
-                      duration-300
-                      ease-in-out
-                      ${
-                        openSubmenu === item.key
-                          ? 'max-h-40 opacity-100'
-                          : 'max-h-0 opacity-0'
-                      }
-                    `}
-                  >
-
-                    <div
-                      className="
-                        mb-3
-                        ml-1
-                        w-[calc(100%-4px)]
-                        overflow-hidden
-                        rounded-xl
-                        border
-                        border-[#E8EEF6]
-                        bg-[#F8FBFF]
-                        p-1.5
-                      "
-                    >
-
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.to}
-                          to={child.to}
-                          onClick={onClose}
-                          className="
-                            group
-                            flex
-                            w-full
-                            min-w-0
-                            items-center
-                            justify-between
-                            gap-3
-                            rounded-lg
-                            px-4
-                            py-3
-                            font-outfit
-                            text-sm
-                            text-[#526071]
-                            transition-all
-                            duration-200
-                            hover:bg-white
-                            hover:text-[#126E89]
-                            hover:shadow-sm
-                          "
-                        >
-
-                          <span className="min-w-0 truncate">
-                            {child.label}
-                          </span>
-
-                          <FaArrowRight
-                            className="
-                              flex-shrink-0
-                              text-[9px]
-                              opacity-0
-                              -translate-x-2
-                              transition-all
-                              duration-200
-                              group-hover:translate-x-0
-                              group-hover:opacity-100
-                            "
-                          />
-
-                        </Link>
-                      ))}
-
-                    </div>
-
-                  </div>
-
+            {/* Direct Contact Info */}
+            <div className="space-y-2.5 pt-2 text-xs text-slate-300 font-outfit">
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0">
+                  <FaMapMarkerAlt className="text-xs" />
                 </div>
-
-              ) : (
-
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={onClose}
-                  className="
-                    group
-                    flex
-                    w-full
-                    min-w-0
-                    items-center
-                    justify-between
-                    gap-4
-                    border-b
-                    border-[#EEF2F7]
-                    py-4
-                    font-syne
-                    text-[16px]
-                    font-semibold
-                    text-[#172033]
-                    transition-colors
-                    duration-200
-                    hover:text-[#126E89]
-                  "
+                <span>123 Innovation Way, Tech Hub, CA 94016</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0">
+                  <FaPhoneAlt className="text-xs" />
+                </div>
+                <a href="tel:+919351764755" className="hover:text-cyan-400 transition-colors">
+                  +91 93517 64755 / +1 (234) 567-8900
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-emerald-900/60 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                  <FaWhatsapp className="text-xs" />
+                </div>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=919351764755&text=Hi%20Growva!%20I%20am%20interested%20in%20discussing%20a%20project%20with%20your%20team."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-emerald-400 transition-colors font-medium"
                 >
+                  WhatsApp: +91 93517 64755
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0">
+                  <FaEnvelope className="text-xs" />
+                </div>
+                <a href="mailto:hello@growva.agency" className="hover:text-cyan-400 transition-colors">
+                  hello@growva.agency
+                </a>
+              </div>
+            </div>
+          </div>
 
-                  <span className="min-w-0 truncate">
-                    {item.label}
-                  </span>
+          {/* Column 2: Our Services (2.5 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-syne font-bold text-base text-white tracking-wide uppercase">
+              Services
+            </h4>
+            <ul className="space-y-2.5 text-sm font-outfit text-slate-400">
+              {services.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.to}
+                    className="hover:text-cyan-400 transition-colors flex items-center gap-1.5 group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-cyan-400 transition-colors" />
+                    <span>{item.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                  <FaArrowRight
-                    className="
-                      flex-shrink-0
-                      text-[10px]
-                      text-[#328CF5]
-                      opacity-0
-                      -translate-x-2
-                      transition-all
-                      duration-200
-                      group-hover:translate-x-0
-                      group-hover:opacity-100
-                    "
-                  />
+          {/* Column 3: Quick Links (2.5 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-syne font-bold text-base text-white tracking-wide uppercase">
+              Company
+            </h4>
+            <ul className="space-y-2.5 text-sm font-outfit text-slate-400">
+              {quickLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.to}
+                    className="hover:text-cyan-400 transition-colors flex items-center gap-1.5 group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-cyan-400 transition-colors" />
+                    <span>{item.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                </Link>
+          {/* Column 4: Newsletter & Social (3 cols) */}
+          <div className="lg:col-span-4 space-y-5">
+            <h4 className="font-syne font-bold text-base text-white tracking-wide uppercase">
+              Stay Connected
+            </h4>
+            <p className="font-outfit text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Subscribe to get monthly insights on technology innovations, UI trends, and business scaling.
+            </p>
 
-              )
+            {subscribed ? (
+              <div className="p-3.5 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 flex items-center gap-2.5 text-xs font-outfit">
+                <FaCheckCircle className="text-cyan-400 text-base shrink-0" />
+                <span>Thank you for subscribing! Check your inbox soon.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="relative">
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-4 pr-12 py-3 rounded-full bg-slate-800/90 border border-slate-700 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-full bg-[#0E7490] hover:bg-cyan-600 text-white flex items-center justify-center transition-colors shadow-sm"
+                >
+                  <FaPaperPlane className="text-xs" />
+                </button>
+              </form>
             )}
 
-          </nav>
-
-          {/* =================================
-              CONTACT INFO
-          ================================== */}
-          <div
-            className="
-              mt-8
-              w-full
-              rounded-2xl
-              border
-              border-[#E5EDF7]
-              bg-[#F8FBFF]
-              p-5
-            "
-          >
-
-            <div className="mb-5 flex items-center justify-between gap-4">
-
-              <div className="min-w-0">
-
-                <span
-                  className="
-                    mb-1
-                    block
-                    font-outfit
-                    text-xs
-                    font-medium
-                    uppercase
-                    tracking-[0.15em]
-                    text-[#328CF5]
-                  "
-                >
-                  Get in touch
-                </span>
-
-                <h4
-                  className="
-                    font-syne
-                    text-lg
-                    font-bold
-                    text-[#172033]
-                  "
-                >
-                  Contact Info
-                </h4>
-
+            {/* Social Media Links */}
+            <div className="pt-2">
+              <span className="text-xs text-slate-500 uppercase tracking-wider block mb-3 font-syne font-semibold">
+                Follow Growva
+              </span>
+              <div className="flex flex-wrap items-center gap-2.5">
+                {socials.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.label}
+                      className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 hover:border-cyan-400 text-slate-300 hover:text-white hover:bg-[#0E7490] flex items-center justify-center transition-all duration-300 shadow-sm hover:-translate-y-0.5"
+                    >
+                      <Icon className="text-xs" />
+                    </a>
+                  );
+                })}
               </div>
-
-              <div
-                className="
-                  flex
-                  h-10
-                  w-10
-                  flex-shrink-0
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-white
-                  text-[#328CF5]
-                  shadow-sm
-                "
-              >
-                <FaEnvelope className="text-sm" />
-              </div>
-
             </div>
-
-            <ul className="space-y-4">
-
-              {/* Address */}
-              <li className="flex min-w-0 items-start gap-3">
-
-                <span
-                  className="
-                    flex
-                    h-9
-                    w-9
-                    flex-shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-white
-                    text-[#328CF5]
-                    shadow-sm
-                  "
-                >
-                  <FaMapMarkerAlt className="text-sm" />
-                </span>
-
-                <span
-                  className="
-                    min-w-0
-                    pt-1
-                    font-outfit
-                    text-sm
-                    leading-6
-                    text-[#667085]
-                  "
-                >
-                  123 Business Street,
-                  <br />
-                  City, Country
-                </span>
-
-              </li>
-
-              {/* Phone */}
-              <li className="flex min-w-0 items-center gap-3">
-
-                <span
-                  className="
-                    flex
-                    h-9
-                    w-9
-                    flex-shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-white
-                    text-[#328CF5]
-                    shadow-sm
-                  "
-                >
-                  <FaPhoneAlt className="text-xs" />
-                </span>
-
-                <a
-                  href="tel:+1234567890"
-                  className="
-                    min-w-0
-                    truncate
-                    font-outfit
-                    text-sm
-                    text-[#526071]
-                    transition-colors
-                    hover:text-[#126E89]
-                  "
-                >
-                  +1 (234) 567-8900
-                </a>
-
-              </li>
-
-              {/* Email */}
-              <li className="flex min-w-0 items-center gap-3">
-
-                <span
-                  className="
-                    flex
-                    h-9
-                    w-9
-                    flex-shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-white
-                    text-[#328CF5]
-                    shadow-sm
-                  "
-                >
-                  <FaEnvelope className="text-xs" />
-                </span>
-
-                <a
-                  href="mailto:info@growva.tech"
-                  className="
-                    min-w-0
-                    truncate
-                    font-outfit
-                    text-sm
-                    text-[#526071]
-                    transition-colors
-                    hover:text-[#126E89]
-                  "
-                >
-                  info@growva.tech
-                </a>
-
-              </li>
-
-            </ul>
-
           </div>
-
-          {/* =================================
-              CTA
-          ================================== */}
-          <Link
-            to="/contact"
-            onClick={onClose}
-            className="
-              group
-              mt-5
-              flex
-              w-full
-              items-center
-              justify-between
-              gap-4
-              rounded-full
-              bg-[#126E89]
-              px-5
-              py-3.5
-              font-syne
-              text-sm
-              font-semibold
-              text-white
-              shadow-[0_8px_20px_-8px_rgba(18,110,137,0.40)]
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-              hover:bg-[#328CF5]
-              hover:shadow-[0_12px_25px_-8px_rgba(50,140,245,0.45)]
-            "
-          >
-
-            <span>
-              Start a Project
-            </span>
-
-            <span
-              className="
-                flex
-                h-8
-                w-8
-                flex-shrink-0
-                items-center
-                justify-center
-                rounded-full
-                bg-white/20
-                transition-all
-                duration-300
-                group-hover:bg-white/25
-              "
-            >
-              <FaArrowRight
-                className="
-                  text-[10px]
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-1
-                "
-              />
-            </span>
-
-          </Link>
-
         </div>
 
-        {/* =================================
-            FOOTER / SOCIALS
-            Footer does NOT scroll
-        ================================== */}
-        <div
-          className="
-            relative
-            z-20
-            flex-shrink-0
-            border-t
-            border-[#E7EDF5]
-            bg-[#FBFCFE]
-            px-6
-            py-5
-            sm:px-8
-          "
-        >
-
-          <div className="flex items-center justify-between gap-4">
-
-            <span
-              className="
-                flex-shrink-0
-                font-outfit
-                text-xs
-                text-[#98A2B3]
-              "
-            >
-              Follow us
-            </span>
-
-            <div className="flex flex-shrink-0 items-center gap-2">
-
-              {SOCIALS.map(
-                ({ icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="
-                      flex
-                      h-9
-                      w-9
-                      flex-shrink-0
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-[#E3EAF3]
-                      bg-white
-                      text-[#667085]
-                      shadow-sm
-                      transition-all
-                      duration-300
-                      hover:-translate-y-0.5
-                      hover:border-[#328CF5]
-                      hover:bg-[#328CF5]
-                      hover:text-white
-                      focus-visible:outline-none
-                      focus-visible:ring-2
-                      focus-visible:ring-[#328CF5]/30
-                    "
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                  </a>
-                )
-              )}
-
-            </div>
-
+        {/* Bottom Copyright & Legal Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-outfit text-slate-500">
+          <p>© {new Date().getFullYear()} Growva Technologies Inc. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <Link to="/contact" className="hover:text-cyan-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link to="/contact" className="hover:text-cyan-400 transition-colors">
+              Terms of Service
+            </Link>
+            <span>•</span>
+            <Link to="/contact" className="hover:text-cyan-400 transition-colors">
+              Security
+            </Link>
           </div>
-
         </div>
-
       </div>
-
-    </div>
+    </footer>
   );
 }

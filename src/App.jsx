@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import OffcanvasMenu from './components/OffcanvasMenu';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import WhatsAppWidget from './components/WhatsAppWidget';
 
 // Pages
 import Home from './pages/Home';
@@ -29,7 +30,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fffaf3] text-[#0c0c0c] font-outfit">
+    <div className="min-h-screen flex flex-col bg-[#F8FAF9] text-[#0F172A] font-outfit">
       <ScrollToTopOnRoute />
 
       {/* Header Navigation */}
@@ -77,7 +78,8 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Scroll to Top */}
+      {/* Floating Action Buttons (WhatsApp & Scroll to Top side by side) */}
+      <WhatsAppWidget />
       <BackToTop />
     </div>
   );

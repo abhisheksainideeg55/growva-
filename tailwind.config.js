@@ -28,8 +28,9 @@ export default {
         sans: ['Outfit', 'sans-serif'],
         syne: ['Syne', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'],
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
         jost: ['Jost', 'sans-serif'],
-        kanit: ['Kanit', 'sans-serif'],
       },
       keyframes: {
         marquee: {

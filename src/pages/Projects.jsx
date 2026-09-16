@@ -1,141 +1,227 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaArrowRight, FaExternalLinkAlt } from 'react-icons/fa';
 import Breadcrumb from '../components/Breadcrumb';
+import ProjectsFilter from '../components/projects/ProjectsFilter';
+import ProjectsGrid from '../components/projects/ProjectsGrid';
+import ProjectsCtaBanner from '../components/projects/ProjectsCtaBanner';
+
+const PORTFOLIO_PROJECTS = [
+  {
+    id: 1,
+    title: 'The Witty Wolf',
+    domain: 'thewittywolf.com',
+    url: 'https://thewittywolf.com',
+    category: 'Digital & Tech',
+    badge: 'Creative Agency',
+    image: '/assets/images/portfolio/thewittywolf-Be92v8Au.png',
+    description: 'Modern digital agency and creative branding solutions built for high digital impact, brand growth, and corporate identity.',
+    tags: ['Branding', 'Web Design', 'Digital Agency'],
+  },
+  {
+    id: 2,
+    title: 'Nakshatrawala',
+    domain: 'nakshatrawala.in',
+    url: 'https://nakshatrawala.in',
+    category: 'Services',
+    badge: 'Astrology & Wellness',
+    image: null,
+    description: 'Vedic astrology, horoscope analysis, and personalized online consultation platform with appointment booking.',
+    tags: ['Astrology', 'Consultation', 'Vedic Sciences'],
+  },
+  {
+    id: 3,
+    title: 'BR API Solutions',
+    domain: 'brapisolutions.com',
+    url: 'https://brapisolutions.com',
+    category: 'Digital & Tech',
+    badge: 'API & Software',
+    image: '/assets/images/portfolio/brApi-B825iCUK.png',
+    description: 'Scalable backend API development, software integrations, fintech connectivity, and enterprise cloud solutions.',
+    tags: ['API Integration', 'Backend', 'Software'],
+  },
+  {
+    id: 4,
+    title: 'Tamanna Clinic & Laser Centre',
+    domain: 'tamannaclinicandlaserpilescentre.com',
+    url: 'https://tamannaclinicandlaserpilescentre.com',
+    category: 'Healthcare & Hospitality',
+    badge: 'Healthcare & Laser Clinic',
+    image: '/assets/images/portfolio/tamana-C9icPUR6.png',
+    description: 'Advanced laser surgical treatment, medical appointment booking, patient portal, and healthcare services website.',
+    tags: ['Healthcare', 'Clinic', 'Medical Services'],
+  },
+  {
+    id: 5,
+    title: 'The Golden Egg',
+    domain: 'thegoldenegg.co.in',
+    url: 'https://thegoldenegg.co.in',
+    category: 'Business & Finance',
+    badge: 'Enterprise Business',
+    image: '/assets/images/portfolio/TheGolden-u7SRC1XC.png',
+    description: 'Commercial business and retail services portal designed for optimized customer engagement and operations.',
+    tags: ['Retail', 'Commercial', 'Enterprise'],
+  },
+  {
+    id: 6,
+    title: 'De Lorraine Paris',
+    domain: 'delorraineparis.com',
+    url: 'https://delorraineparis.com',
+    category: 'Business & Finance',
+    badge: 'Luxury & Beauty',
+    image: null,
+    description: 'Premium luxury beauty, cosmetics, and lifestyle brand digital showcase portal and e-commerce store.',
+    tags: ['Luxury', 'Cosmetics', 'Lifestyle'],
+  },
+  {
+    id: 7,
+    title: 'My All Business Consultant',
+    domain: 'myallbusinessconsultant.com',
+    url: 'https://myallbusinessconsultant.com',
+    category: 'Business & Finance',
+    badge: 'Corporate Advisory',
+    image: '/assets/images/portfolio/myallBussiones-atHnTvLq.png',
+    description: 'Corporate business consulting, company registration, financial planning, audit, and legal compliance services.',
+    tags: ['Consulting', 'Business Setup', 'Legal'],
+  },
+  {
+    id: 8,
+    title: 'Ranthambhore Bunglow',
+    domain: 'ranthambhorebunglow.com',
+    url: 'https://www.ranthambhorebunglow.com',
+    category: 'Healthcare & Hospitality',
+    badge: 'Luxury Resort & Stay',
+    image: '/assets/images/portfolio/ranthambhor-CUN-jzOY.png',
+    description: 'Luxury safari resort stay booking, wildlife tour packages, room reservations, and premium hospitality experiences.',
+    tags: ['Resort', 'Tourism', 'Wildlife Safari'],
+  },
+  {
+    id: 9,
+    title: 'Good ITR',
+    domain: 'gooditr.com',
+    url: 'https://gooditr.com',
+    category: 'Business & Finance',
+    badge: 'FinTech & Tax',
+    image: '/assets/images/portfolio/goodItr-CKBxvc0k.png',
+    description: 'Online Income Tax Return (ITR) filing, GST compliance, tax saving advisory, and automated financial accounting.',
+    tags: ['Tax Filing', 'FinTech', 'Accounting'],
+  },
+  {
+    id: 10,
+    title: 'Pareek Copier',
+    domain: 'pareekcopier.com',
+    url: 'https://pareekcopier.com',
+    category: 'Services',
+    badge: 'Office Automation',
+    image: '/assets/images/portfolio/pareekcopier-DNXsysYQ.png',
+    description: 'Commercial printing machinery, digital copiers, maintenance support, and office equipment supply services.',
+    tags: ['Printing', 'Copiers', 'Office Tech'],
+  },
+  {
+    id: 11,
+    title: 'Net Secure Foundation',
+    domain: 'netsecurefdn.org',
+    url: 'https://netsecurefdn.org',
+    category: 'Digital & Tech',
+    badge: 'Cybersecurity NGO',
+    image: '/assets/images/portfolio/netsecureFoundation-BuMMvLcO.png',
+    description: 'Cyber hygiene training, digital safety awareness campaigns, public safety workshops, and cybersecurity foundation.',
+    tags: ['Cybersecurity', 'NGO', 'Digital Safety'],
+  },
+  {
+    id: 12,
+    title: 'Null Cyber X',
+    domain: 'nullcyberx.in',
+    url: 'https://nullcyberx.in',
+    category: 'Digital & Tech',
+    badge: 'Cyber Defense & VAPT',
+    image: '/assets/images/portfolio/nullcyberX-CVh3Y3O-.png',
+    description: 'Vulnerability assessment, penetration testing (VAPT), red teaming, threat hunting, and security auditing.',
+    tags: ['Penetration Testing', 'Security', 'VAPT'],
+  },
+  {
+    id: 13,
+    title: 'A One Taxi Service',
+    domain: 'aonetaxiservice.com',
+    url: 'https://aonetaxiservice.com',
+    category: 'Services',
+    badge: 'Travel & Cab Rental',
+    image: '/assets/images/portfolio/taxi-CZuuJuZX.png',
+    description: 'Outstation cab bookings, local taxi rentals, tour packages, and 24/7 airport transfer service portal.',
+    tags: ['Taxi Service', 'Travel', 'Cab Rental'],
+  },
+  {
+    id: 14,
+    title: 'Krishna Infinity',
+    domain: 'krishnainfinity.com',
+    url: 'https://krishnainfinity.com',
+    category: 'Digital & Tech',
+    badge: 'IT & Enterprise',
+    image: null,
+    description: 'End-to-end software development, digital marketing, IT staffing, and enterprise digital solutions.',
+    tags: ['Software', 'Digital Solutions', 'Enterprise'],
+  },
+];
+
+const CATEGORIES = [
+  'All',
+  'Digital & Tech',
+  'Business & Finance',
+  'Healthcare & Hospitality',
+  'Services',
+];
 
 export default function Projects() {
-  const [filter, setFilter] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const projects = [
-    {
-      id: 'fintech-dashboard',
-      title: 'FinTech Analytics & Banking Portal',
-      category: 'webapp',
-      categoryLabel: 'Web Application',
-      image: '/assets/images/services/serviceThumb3.jpg',
-      desc: 'Next-generation financial analytics dashboard with real-time portfolio tracking.',
-    },
-    {
-      id: 'fashion-ecommerce',
-      title: 'Luxury Apparel E-Commerce Store',
-      category: 'ecommerce',
-      categoryLabel: 'E-Commerce',
-      image: '/assets/images/about/aboutThunb3.jpg',
-      desc: 'High-converting headless Shopify and React storefront with custom 3D view.',
-    },
-    {
-      id: 'health-mobile-app',
-      title: 'MediCare Telehealth Design System',
-      category: 'design',
-      categoryLabel: 'UI/UX Design',
-      image: '/assets/images/contact/contactThumb3.jpg',
-      desc: 'Comprehensive patient portal UI/UX architecture and accessible design tokens.',
-    },
-    {
-      id: 'ai-saas-platform',
-      title: 'AI Content Generation Platform',
-      category: 'webapp',
-      categoryLabel: 'Web Application',
-      image: '/assets/images/blog/blogThumb3_1.jpg',
-      desc: 'Full-stack AI automation suite with subscription tier billing and usage limits.',
-    },
-    {
-      id: 'real-estate-portal',
-      title: 'Prime Estate Real Estate Marketplace',
-      category: 'ecommerce',
-      categoryLabel: 'E-Commerce',
-      image: '/assets/images/blog/blogThumb3_2.jpg',
-      desc: 'Interactive map property search engine with virtual tours and agent bookings.',
-    },
-    {
-      id: 'crypto-wallet-ui',
-      title: 'Nexus Web3 Crypto Wallet Interface',
-      category: 'design',
-      categoryLabel: 'UI/UX Design',
-      image: '/assets/images/cta/ctaThumb3_1.jpg',
-      desc: 'Minimalist dark-mode decentralized wallet with multi-chain swap flows.',
-    },
-  ];
+  const filteredProjects = PORTFOLIO_PROJECTS.filter((project) => {
+    const matchesCategory =
+      activeCategory === 'All' || project.category === activeCategory;
+    const query = searchQuery.toLowerCase().trim();
+    const matchesSearch =
+      !query ||
+      project.title.toLowerCase().includes(query) ||
+      project.domain.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query) ||
+      project.badge.toLowerCase().includes(query) ||
+      project.tags.some((t) => t.toLowerCase().includes(query));
 
-  const filteredProjects =
-    filter === 'all'
-      ? projects
-      : projects.filter((p) => p.category === filter);
+    return matchesCategory && matchesSearch;
+  });
+
+  const handleResetFilters = () => {
+    setActiveCategory('All');
+    setSearchQuery('');
+  };
 
   return (
-    <div>
+    <div className="bg-[#F8FAF9] min-h-screen text-[#0F172A]">
       <Breadcrumb
-        title="Our Projects"
-        subtitle="Explore our portfolio of successful digital transformations, web applications, and UI/UX designs."
+        title="Our Client Portfolio"
+        subtitle="Explore our curated showcase of live client websites, web applications, and enterprise platforms engineered for performance and growth."
       />
 
-      <section className="py-24 bg-[#fffaf3]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-            {[
-              { id: 'all', label: 'All Projects' },
-              { id: 'webapp', label: 'Web Applications' },
-              { id: 'ecommerce', label: 'E-Commerce' },
-              { id: 'design', label: 'UI/UX Design' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setFilter(tab.id)}
-                className={`px-6 py-2.5 rounded-full font-syne font-bold text-xs sm:text-sm transition-all duration-300 ${
-                  filter === tab.id
-                    ? 'bg-[#fe5e3a] text-white shadow-md'
-                    : 'bg-white text-gray-700 border border-gray-200 hover:border-[#fe5e3a]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Filter Controls */}
+        <ProjectsFilter
+          categories={CATEGORIES}
+          activeCategory={activeCategory}
+          onSelectCategory={setActiveCategory}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onClearSearch={() => setSearchQuery('')}
+          totalResults={PORTFOLIO_PROJECTS.length}
+          filteredCount={filteredProjects.length}
+        />
 
-          {/* Project Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((proj) => (
-              <div
-                key={proj.id}
-                className="group rounded-3xl overflow-hidden bg-white border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-64 overflow-hidden bg-gray-100">
-                    <img
-                      src={proj.image}
-                      alt={proj.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4 bg-[#0c0c0c]/80 backdrop-blur-sm text-white px-3.5 py-1 rounded-full text-xs font-syne font-semibold">
-                      {proj.categoryLabel}
-                    </div>
-                  </div>
-
-                  <div className="p-7">
-                    <h3 className="font-syne font-bold text-xl text-gray-900 group-hover:text-[#fe5e3a] transition-colors mb-3">
-                      <Link to="/project-details">{proj.title}</Link>
-                    </h3>
-                    <p className="font-outfit text-sm text-gray-600 leading-relaxed mb-6">
-                      {proj.desc}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-7 pb-7 pt-0">
-                  <Link
-                    to="/project-details"
-                    className="inline-flex items-center justify-between w-full pt-4 border-t border-gray-100 font-syne font-bold text-xs text-[#0c0c0c] group-hover:text-[#fe5e3a] transition-colors uppercase tracking-wider"
-                  >
-                    <span>View Case Study</span>
-                    <FaArrowRight className="text-[10px]" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Portfolio Cards Grid */}
+        <ProjectsGrid
+          projects={filteredProjects}
+          onResetFilters={handleResetFilters}
+        />
       </section>
+
+      {/* Bottom CTA Banner */}
+      <ProjectsCtaBanner />
     </div>
   );
 }

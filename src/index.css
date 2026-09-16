@@ -3,20 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --body: #fffaf3;
-  --black: #000000;
+  --body: #F8FAF9;
+  --black: #0F172A;
   --white: #ffffff;
-  --theme: #fe5e3a;
-  --theme2: #f5f1ea;
-  --theme3: #8a5133;
-  --theme4: #b90808;
-  --title: #282c32;
-  --orange: #e78c45;
-  --text: #0c0c0c;
-  --text2: #cbcbcb;
-  --border: #0c0c0c;
-  --lime-bg: #eef8d8;
-  --yellow-bg: #ffe175;
+  --theme: #0E7490;
+  --theme-light: #06B6D4;
+  --theme-dark: #083344;
+  --theme-accent: #0284C7;
+  --teal-bg: #EBF7F7;
+  --title: #0F172A;
+  --text: #334155;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
 }
 
 @layer base {
@@ -33,51 +31,70 @@
   }
 }
 
+/* Premium Shimmer Button */
+.btn-shimmer {
+  background: linear-gradient(90deg, #0E7490 0%, #06B6D4 50%, #0E7490 100%);
+  background-size: 200% auto;
+  transition: all 0.4s ease;
+}
+.btn-shimmer:hover {
+  background-position: right center;
+  box-shadow: 0 10px 25px -5px rgba(14, 116, 144, 0.4);
+}
+
+/* Premium Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.glass-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(14, 116, 144, 0.12), 0 0 1px 1px rgba(14, 116, 144, 0.1);
+  border-color: rgba(14, 116, 144, 0.25);
+}
+
 /* Custom Growva Button Styles */
-.theme-btn {
-  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-white bg-[#126E89] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+.btn-primary {
+  @apply relative inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full font-syne font-semibold text-sm text-white bg-[#0E7490] hover:bg-[#086178] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#0E7490]/25 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#0E7490]/50;
 }
 
-.theme-btn-orange {
-  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-white bg-[#126E89] hover:bg-[#fff] hover:text-[#126E89] hover:border-[#126E89] hover:border-[1px] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
-}
-
-.theme-btn-outline {
-  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-[#126E89] border-2 border-[#126E89]  hover:text-white transition-all duration-300;
-}
-
-.theme-btn-lime {
-  @apply relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-syne font-bold text-sm text-[#126E89] bg-white border border-[#126E89] hover:bg-[#126E89] hover:text-white transition-all duration-300;
-}
-
-/* Lime Section Wrapper */
-.lime-section {
-  background-color: #f1fbe2;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-/* Subtitle Pill / Badge */
-.sub-badge {
-  @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0c0c0c]/5 text-[#fe5e3a] font-syne font-bold text-xs uppercase tracking-wider mb-3;
-}
-
-/* Custom Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
+.btn-secondary {
+  @apply relative inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full font-syne font-semibold text-sm text-[#0F172A] bg-white border border-[#CBD5E1] hover:border-[#0E7490] hover:text-[#0E7490] transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none shadow-sm hover:shadow-md;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #fffaf3;
+  background: #F8FAF9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e0d8cc;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #fe5e3a;
+  background: #0E7490;
+}
+
+/* Infinite Marquee */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-smooth {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+.animate-marquee-smooth:hover {
+  animation-play-state: paused;
 }
